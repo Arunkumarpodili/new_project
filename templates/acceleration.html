@@ -1,0 +1,81 @@
+<div id="acceleration"></div>
+	<script src='https://cdn.plot.ly/plotly-2.24.1.min.js'></script>
+</head>
+
+<body>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+<style>
+  label {
+    font-size: 14px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .form-container {
+    width: 40%;
+  }
+
+  .chart-container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+<script>
+  var json_data1 = {{json_data1|safe}};
+  var labels = json_data1.map(item => item.label);
+  var values = json_data1.map(item => item.data);
+  var colors = ["red", "orange", "#95a5a6"];
+  var ctx = document.getElementById("Chart").getContext("2d");
+  var Chart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        backgroundColor: colors
+      }]
+    },
+    options: {
+      responsive: false,
+           legend: {
+      position: 'left'
+    }
+    }
+  });
+</script>
+
+<div class="container">
+  <div class="form-container">
+    <p><b>Acceleration counts for selected vehicle</b></p>
+    <form id="count-form">
+      <label for="lower_limit">Lower Limit:</label>
+      <input type="text" id="lower_limit" name="lower_limit" style="font-size: 12px;">
+      <br>
+      <label for="upper_limit1">Upper Limit 1:</label>
+      <input type="text" id="upper_limit1" name="upper_limit1" style="font-size: 12px;">
+      <br>
+      <label for="upper_limit2">Upper Limit 2:</label>
+      <input type="text" id="upper_limit2" name="upper_limit2" style="font-size: 12px;">
+      <br>
+    </form>
+    <br>
+    <p><b>The acceleration count is {{id_count}}</b></p>
+  </div>
+  <div class="chart-container ">
+    <p><b>Aggressive riding customers</b></p>
+    <canvas id="Chart"></canvas>
+  </div>
+</div>

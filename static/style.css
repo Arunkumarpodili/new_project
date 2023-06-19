@@ -1,0 +1,161 @@
+.main {
+ margin-left: 150px;
+ margin- right: 150px;
+ font-size: 150%;
+ padding: 0 2%;
+
+}
+
+    .sidebar {
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: black;
+      padding: 16px;
+      z-index: 1;
+    }
+
+.rightbar {
+ height: 100%;
+ width: 140px;
+ top: 0;
+  text-align: center;
+ right: 0;
+ position: fixed;
+ background-color: black;
+ padding-top: 20px;
+  z-index: 1;
+}
+
+.sidebar a {
+ display: block;
+ text-align: center;
+ padding: 2% 2%;
+ text-decoration: none;
+ color: white;
+ font-size: 1em;
+}
+
+  .card-header {
+    padding: 1rem 1rem;
+    margin-bottom: 1;
+    background-color: #090f80;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+
+.sidebar i {
+ display: block;
+ text-align: center;
+ text-decoration: none;
+ color: white;
+ font-size: 1em;
+}
+.block {
+  display: block;
+   text-align: center;
+    padding: 5px;
+}
+.block:hover {
+  background-color: blue;
+}
+.block {
+   width: 130px;
+  height: 60px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  transition: background-color 0.1s;
+}
+.topnav {
+    background-color: #000066;
+    padding: 6px;
+    margin-left: 120px; /* Match the sidebar's width */
+    z-index: 1; /* Ensure the topnav appears above the sidebar */
+}
+.topnav {
+      background-color: #000066;
+      padding: 2px;
+      text-align: center;
+          z-index: 1; /* Ensure the topnav appears above the sidebar */
+    }
+
+    .topnav a {
+      color: white;
+      text-align: center;
+      padding: 12px 13px;
+      text-decoration: none;
+      font-size: 18px;
+      display: inline-block;
+    }
+    .card-header_04{
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    background-color: #ded3b8 ;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+table, th, td {
+  border:1px solid black;
+    padding: 3px;
+}
+.left-align {
+  text-align: left;
+  margin-right: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 12px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+#config-demo {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 8px;
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+  display: block
+}
+
+#myUL li :hover:not(.header) {
+  background-color: #eee;
+}
+.card {
+  display: none; /* Initially hide the card */
+  /* Add styles for the card */
+}
+ .card-header1 {
+    padding: 1rem 1rem;
+    margin-bottom: 1;
+    background-color:#9e969a;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="cyclechart"></div>
+
+    <script>
+        var dataValue = {{data}};
+
+        var data = [
+            {
+                domain: { x: [0, 1], y: [0, 1] },
+                value: dataValue,
+                title: { text: "Battery Cycles" },
+                type: "indicator",
+                mode: "gauge+number",
+                gauge: {
+                    axis: { range: [null, 10] },
+                    steps: [
+                        { range: [0, 5], color: "lightgray" },
+                        { range: [5, 10], color: "gray" }
+                    ],
+                    threshold: {
+                        line: { color: "red", width: 4 },
+                        thickness: 0.75,
+                        value: dataValue
+                    }
+                }
+            }
+        ];
+
+        var layout = { width: 600, height: 400 };
+
+        Plotly.newPlot('cyclechart', data, layout);
+    </script>
+</body>
+</html>

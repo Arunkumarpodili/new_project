@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.css" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+  label {
+    font-size: 14px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .form-container {
+    width: 50%;
+  }
+
+  .chart-container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+
+    <div class="container">
+      <div class="chart-container">
+              <p><b>Average km/day</b></p>
+              <div id="gaugeChart"></div>
+          </div>
+          <div class="chart-container">
+    <p><b>Top 3 customer </b></p>
+    <canvas id="barChart"></canvas>
+  </div>
+</div>
+    <script>
+function generateGraph() {
+  // Parse the JSON data
+        var chartData = {
+    labels: [],
+    datasets: [{
+        label: 'Results',
+        data: [],
+        backgroundColor:['rgba(255, 99, 132, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 205, 86, 0.2)'],
+
+        borderColor: [
+      'rgb(255, 99, 132)',
+         'rgb(75, 192, 192)',
+               'rgb(255, 205, 86)',
+      ],
+        borderWidth: 1
+    }]
+};
+
+// Populate the chartData using the serialized JSON data
+var jsonData = {{ json_data|safe }};
+jsonData.forEach(function(item) {
+    chartData.labels.push(item.label);
+    chartData.datasets[0].data.push(item.data);
+});
+// Create the bar chart
+var ctx = document.getElementById('barChart').getContext('2d');
+new Chart(ctx, {
+    type: 'bar',
+    data: chartData,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+  // Retrieve the c1result value from the server response
+       var options = {
+          series: [{{ c1result}}],
+          chart: {
+          height: 350,
+          type: 'radialBar',
+          toolbar: {
+            show: true
+          }
+        },
+        plotOptions: {
+          radialBar: {
+            startAngle: -135,
+            endAngle: 650,
+             hollow: {
+              margin: 0,
+              size: '60%',
+              background: '#fff',
+              image: undefined,
+              imageOffsetX: 0,
+              imageOffsetY: 0,
+              position: 'front',
+              dropShadow: {
+                enabled: true,
+                top: 3,
+                left: 0,
+                blur: 4,
+                opacity: 0.84
+              }
+            },
+            track: {
+              background: '#fff',
+              strokeWidth: '90%',
+              margin: 0, // margin is in pixels
+              dropShadow: {
+                enabled: true,
+                top: -3,
+                left: 0,
+                blur: 4,
+                opacity: 0.35
+              }
+            },
+
+            dataLabels: {
+              show: true,
+              name: {
+                offsetY: -10,
+                show: true,
+                color: '#888',
+                fontSize: '15px'
+              },
+              value: {
+                formatter: function(val) {
+                  return parseInt(val)+ ' Km';
+                },
+                color: '#111',
+                fontSize: '25px',
+                show: true,
+              }
+            }
+          }
+        },
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shade: 'dark',
+            type: 'horizontal',
+            shadeIntensity: 0.5,
+            gradientToColors: ['#ABE5A1'],
+            inverseColors: true,
+            opacityFrom: 1,
+            opacityTo: 1,
+            stops: [0, 100]
+          }
+        },
+        stroke: {
+          lineCap: 'round'
+        },
+        labels: ['Average Km/day'],
+        };
+
+        var gaugeChart = new ApexCharts(document.querySelector("#gaugeChart"), options);
+        gaugeChart.render();
+           }
+
+    </script>
+</body>
+</html>

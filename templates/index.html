@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+</style>
+</head>
+<body>
+    <div class="topnav">
+                 <a style="color:white;" >Widgets Dashboard</a>
+    </div>
+<div class="sidebar"onclick="toggleCard()" >
+    <img src="static/logoingo.jpg">
+          <br>
+          <br>
+          <br>
+	<div class="block"id="averageKmLink">
+  <i style="font-size:18px" class="fa">&#xf0e4;</i>
+  <a href="#" >Average Km</a>
+</div>
+    <br>
+<div class="block" id="accelerationCountsLink">
+  <i style="font-size:18px" class="fa">&#xf080;</i>
+  <a href="#"  >Acceleration counts</a><br />
+</div>
+        <br>
+<div class="block" id="batteryCyclesLink">
+  <i style="font-size:15px" class="fa">&#xf201;</i>
+  <br>
+  <a href="#" >Battery cycles</a><br />
+</div>
+        <br>
+<div class="block"id="speedLink">
+  <i style="font-size:15px" class="fa">&#xf1fe;</i><br>
+  <a href="#" >Speed</a><br />
+</div>
+        <br>
+<div class="block"id="utilizationLink">
+  <i style="font-size:15px" class="fa">&#xf200;</i>
+  <a href="#" >Utilization</a><br />
+</div>
+        <br>
+<div class="block"id="onOffCountsLink">
+  <i style="font-size:15px" class="fa">&#xf1cd;</i>
+  <a href="#" >Number of ON/OFF counts</a><br />
+</div>
+        <br>
+<div class="block">
+  <i style="font-size:18px" class="fa">&#xf017;</i>
+  <a href="#" id="avgOnOffTimeLink">Average ON/OFF time</a><br />
+</div>
+        <br>
+<div class="block" id="selfDischargeAlertLink">
+  <i style="font-size:15px" class="fa">&#xf0f3;</i>
+  <a href="#" >Self Discharge alert</a><br />
+</div>
+</div>
+    <div>
+    </div>
+    <div class="main">
+    <div class="col-md-4">
+<div id="averageodo"></div>
+<div id="acceleration"></div>
+        <div id="averagespeed"></div>
+        <div id="batterycycles"></div>
+    </div>
+<div class="col-md-5">
+    </div>
+    <div class="col-md-3">
+      <div id="card" class="card">
+        <ul id="myUL">
+          <li>
+            <div id="reportrange" style="background: #fff; font-size: 11px; cursor: pointer; padding: 5px 8px; border: 1px solid #ccc;">
+              <span></span> <b class="caret"></b>
+            </div>
+          </li>
+          <li>
+        <input type="checkbox" id="selectAllTables" name="table_name" value="all" onclick="checkedAll();">
+        <label for="selectAllTables">Select All</label>
+    </li>
+    <li>
+        <input type="checkbox" id="b1allsaints" name="table_name" value="b1allsaints">
+        <label for="b1allsaints">b1allsaints</label>
+    </li>
+    <li>
+        <input type="checkbox" id="b1trivenienterprises002" name="table_name" value="b1trivenienterprises002">
+        <label for="b1trivenienterprises002">b1trivenienterprises002</label>
+    </li>
+             <li>
+        <input type="checkbox" id="b1rajkamalscreations003" name="table_name" value="b1rajkamalscreations003">
+        <label for="b1rajkamalscreations003">b1rajkamalscreations003</label>
+    </li>
+                         <li>
+        <input type="checkbox" id="b1youdeemerchandising004" name="table_name" value="b1youdeemerchandising004">
+        <label for="b1youdeemerchandising004">b1youdeemerchandising004</label>
+    </li>
+            <li> <button onclick="generateGraph()">Generate</button>
+</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+      <script src='https://cdn.plot.ly/plotly-2.20.0.min.js'></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <script src="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-alpha.6.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+          <script src ="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+                   <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+                   <script src ="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+     <script src="{{ url_for('static', filename='time.js')}}"></script>
+     <script src="{{ url_for('static', filename='count.js')}}"></script>
+         <script src="{{ url_for('static', filename='speed.js')}}"></script>
+             <script src="{{ url_for('static', filename='battery.js')}}"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+    <script>
+function toggleCard() {
+  var card = document.getElementById('card');
+  if (card.style.display === 'sidebar') {
+    card.style.display = 'none';
+  } else {
+    card.style.display = 'block';
+  }
+}
+</script>
+
+<script>
+    function checkedAll() {
+        // Get the reference to the "Select All" checkbox
+        var selectAllCheckbox = document.getElementById("selectAllTables");
+
+        // Get all the checkboxes with the name "table_name"
+        var checkboxes = document.getElementsByName("table_name");
+
+        // Loop through all the checkboxes and check/uncheck them based on the "Select All" checkbox
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = selectAllCheckbox.checked;
+        }
+    }
+</script>
+   <script>
+$(document).ready(function(){
+  $('#accelerationCountsLink').click(function(){
+    $('#acceleration').show();
+    $('#averageodo').hide();
+    $("#averagespeed").hide();
+    $("#batterycycles").hide();
+  });
+
+  $("#speedLink").click(function(){
+    $('#acceleration').hide();
+    $('#averageodo').hide();
+    $("#averagespeed").show();
+    $("#batterycycles").hide();
+  });
+
+  $("#averageKmLink").click(function(){
+    $('#acceleration').hide();
+    $('#averageodo').show();
+    $("#averagespeed").hide();
+    $("#batterycycles").hide();
+  });
+
+  $("#batteryCyclesLink").click(function(){
+    $('#acceleration').hide();
+    $('#averageodo').hide();
+    $("#averagespeed").hide();
+    $("#batterycycles").show();
+  });
+});
+</script>
+
+</div>
+</div>
+
+</body>
+</html>

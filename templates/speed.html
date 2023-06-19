@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+      <div class="chart-container">
+              <p><b> Average Speed </b></p>
+    <div id="chart" style="width: 520px; height: 400px;"></div>
+          </div>
+          <div class="chart-container">
+    <p><b>Top Speed </b></p>
+  <div id="myDiv" style="width: 540px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+  </div>
+</div>
+
+    <script>
+        // Parse the JSON data
+        var jsonData = {{data1|safe}};
+
+        // Extract the date and speed values
+        var speeds = Object.keys(jsonData);
+        var dates = Object.values(jsonData);
+
+        // Create the trace
+        var trace = {
+            x: speeds,
+            y: dates,
+            type: 'bar',
+                        orientation: 'v',
+
+            marker: {
+                color: 'rgba(0, 123, 255, 0.8)'
+            }
+        };
+
+        // Create the data array
+        var data = [trace];
+
+        // Create the layout
+        // Create the layout
+var layout = {
+  xaxis: {
+    title: 'Date',
+  },
+  yaxis: {
+    title: 'Speed',
+     tickformat: '%b %d',
+ // Display y-axis tick labels as regular integers
+  }
+};
+        // Plot the chart
+        Plotly.newPlot('myDiv', data, layout);
+    </script>
+<script>
+  // Parse the JSON data
+  var jsonData = {{data|safe}};
+  // Extract the date and average speed values
+  var dates = Object.keys(jsonData);
+  var speeds = Object.values(jsonData);
+  // Create the trace
+  var trace = {
+    x: dates,
+    y: speeds,
+    mode: 'lines',
+    fill: 'tonexty',
+    type: 'scatter',
+    line: {
+      color: 'darkslategray'
+    },
+    fillcolor: 'lightblue'
+  };
+  // Create the data array
+  var data = [trace];
+  // Create the layout
+  var layout = {
+    xaxis: {
+      title: 'Date',
+    tickformat: '%b %d', // Format to display month and day (e.g., "May 13")
+      tickangle: -45  // Rotate labels diagonally
+    },
+    yaxis: {
+      title: 'Speed'
+
+    }
+  };
+  // Plot the chart
+  Plotly.newPlot('chart', data, layout);
+</script>
+</body>
+</html>
